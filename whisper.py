@@ -15,6 +15,7 @@ class Whisper:
     self.model = None
     self.processor = AutoProcessor.from_pretrained(model_id)
     self.pipe = None
+    self.load()
 
   def load(self):
     self.model = AutoModelForSpeechSeq2Seq.from_pretrained(self.model_id,
