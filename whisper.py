@@ -7,7 +7,7 @@ from transformers import pipeline
 
 
 class Whisper:
-  def __init__(self, model_id =  "openai/whisper-large-v3", gpu = True):
+  def __init__(self, model_id = "openai/whisper-large-v3", gpu = True):
     self.model_id = model_id
     self.device = "cuda:0" if torch.cuda.is_available() and gpu else "cpu"
     self.torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
@@ -38,7 +38,7 @@ class Whisper:
   
     return None 
   
-  def audio_processor(self, audio_path = '/Audio2Text/test_data/test_audio.ogg'):
+  def audio_processor(self, audio_path = 'test_data/test_audio.ogg'):
     
     audio, sr = librosa.load(audio_path, sr=16000)
 
