@@ -1,5 +1,11 @@
 from whisper import Whisper
 import gradio as gr
+import requests
+
+# Fetch the license text from GitHub
+license_url = "https://raw.githubusercontent.com/openai/whisper/main/LICENSE"
+response = requests.get(license_url)
+license_text = response.text
 
 # Initialize the Whisper model
 whisper = Whisper()
@@ -14,8 +20,9 @@ iface = gr.Interface(
     outputs="text",  # Output will be the transcribed text
     title="(OpenAi) מתמלל שיחות הלשכה המרכזית לסטטיסטיקה",
     description="Upload or Record Audio",
-    examples=[sample_audio]  # Optional sample audio file
+    examples=[sample_audio],  # Optional sample audio file
+    article = license_text
 )
 
 # Launch the app
-iface.launch(debug=True)
+iface.launch(debug=True, share=True)
