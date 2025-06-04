@@ -4,8 +4,13 @@ import requests
 
 # Fetch the license text from GitHub
 license_url = "https://raw.githubusercontent.com/openai/whisper/main/LICENSE"
-response = requests.get(license_url)
-license_text = response.text
+try:
+    response = requests.get(license_url, timeout=5)
+    response.raise_for_status()
+    license_text = response.text
+except requests.RequestException:
+    # Fallback text in case the license cannot be retrieved (e.g. no network)
+    license_text = "License text could not be loaded from GitHub."
 
 # Initialize the Whisper model
 whisper = Whisper()
